@@ -63,9 +63,9 @@ int main(){
 
     Config(pins, PINS, &pio);
 
-    //InitPIO(&pio, MATRIXPIN);
+    InitPIO(&pio, MATRIXPIN);
 
-    //Draw(sketch, ledConf, pio);
+    Draw(sketch, ledConf, pio);
 
 
     interruptContext.pinToCompare[1] = BUTTONB;
@@ -88,9 +88,53 @@ int main(){
     // for(int i = 0; i < PINS; i++)
     //     PrintPinOut(pins[i]);
 
+    char a;
     while(1){
 
-        //printf("RED: %d, BLUE: %d, GREEN: %d\n", gpio_get(13),gpio_get(12),gpio_get(11));
+        a = getchar();
+        switch(a){
+            case '0':
+                ArrayCopySameSize(sketch.Figure, SketchArray(0), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+            case '1':
+                ArrayCopySameSize(sketch.Figure, SketchArray(1), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+            case '2':
+                ArrayCopySameSize(sketch.Figure, SketchArray(2), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+            case '3':
+                ArrayCopySameSize(sketch.Figure, SketchArray(3), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+            case '4':
+                ArrayCopySameSize(sketch.Figure, SketchArray(4), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+            case '5':
+                ArrayCopySameSize(sketch.Figure, SketchArray(5), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+            case '6':
+                ArrayCopySameSize(sketch.Figure, SketchArray(6), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+            case '7':
+                ArrayCopySameSize(sketch.Figure, SketchArray(7), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+            case '8':
+                ArrayCopySameSize(sketch.Figure, SketchArray(8), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+            case '9':
+                ArrayCopySameSize(sketch.Figure, SketchArray(9), VECTORSIZE);
+                Draw(sketch, ledConf, pio);
+                break;
+
+        }
         sleep_ms(1);
     }
 
