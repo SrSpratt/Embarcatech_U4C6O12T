@@ -1,7 +1,7 @@
-#include <General_U4C4.h>
+#include <General_U4C6.h>
 #include <stdio.h>
 #include "hardware/clocks.h"
-#include "pio_u4c4.pio.h"
+#include "pio_u4c6.pio.h"
 #include "hardware/adc.h"
 
 void PrintPinOut(PinOut pin){

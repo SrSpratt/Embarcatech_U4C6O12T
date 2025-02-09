@@ -1,4 +1,4 @@
-#include <LEDMatrix_U4C4.h>
+#include <LEDMatrix_U4C6.h>
 #include <stdio.h>
 
 void PrintArraySketch(double* array, int size){

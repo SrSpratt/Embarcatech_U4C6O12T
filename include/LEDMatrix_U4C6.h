@@ -1,7 +1,7 @@
-#ifndef LEDMATRIXU4C4_H
-#define LEDMATRIXU4C4_H
+#ifndef LEDMATRIXU4C6_H
+#define LEDMATRIXU4C6_H
 
-#include "General_U4C4.h"
+#include "General_U4C6.h"
 
 #define MATRIXPIN 7 // Número do pino para a matriz de LEDs.
 #define VECTORSIZE 25 // Tamanho do vetor que representa a matriz de LEDs (5x5).

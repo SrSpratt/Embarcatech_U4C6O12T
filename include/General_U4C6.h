@@ -1,8 +1,9 @@
-#ifndef GENERALU4C_H
-#define GENERALU4C_H
+#ifndef GENERALU6C_H
+#define GENERALU6C_H
 
 #include "pico/stdlib.h"
 #include "hardware/pio.h"
+#include <Interfaces_U4C6.h>
 
 
 typedef struct PinSet {

@@ -1,15 +1,16 @@
-#include <Interrupt_U4C4.h>
+#include <Interrupt_U4C6.h>
 
-InterruptContext interruptContext = {NULL, {0}, 0, {0}, 0, 0};
+InterruptContext interruptContext = {NULL, NULL, 0, {0,0}, {0,0,0}, (ssd1306_t*)NULL};
 volatile uint32_t intervalButtonA = 0;
 volatile uint32_t intervalButtonB = 0;
 
-void SetRGBInterrupt(InterruptNewCallback callback, int inputPin, int pins[3]) {
+void SetRGBInterrupt(InterruptNewCallback callback, int inputPin, int pins[3], InterruptDisplayCallback displayCallback) {
     printf("RGB INTERRUPT\n");
     interruptContext.Callback = callback;
+    interruptContext.DisplayCallback = displayCallback;
     interruptContext.inputPin = inputPin;
     interruptContext.RGBPin[2] = pins[2];
-    //interruptContext.RGBPin[1] = pins[1];
+    interruptContext.RGBPin[1] = pins[1];
     interruptContext.RGBPin[0] = pins[0];
     gpio_set_irq_enabled_with_callback(inputPin, GPIO_IRQ_EDGE_RISE, true, &HandleInterruptRGB);
 }
@@ -24,14 +25,32 @@ void HandleInterruptRGB(uint gpio, uint32_t events) {
                 intervalButtonA = currentTime;
                 pin = interruptContext.RGBPin[2];
                 printf("PIN: %d\n",pin);
-                interruptContext.Callback(11);
+                interruptContext.Callback(pin);
+                interruptContext.DisplayCallback(interruptContext.SSD, pin);
             } else {
                 intervalButtonB = currentTime;
-                pin = interruptContext.RGBPin[0];
+                pin = interruptContext.RGBPin[1];
                 printf("PIN: %d\n",pin);
-                interruptContext.Callback(12);
+                interruptContext.Callback(pin);
+                interruptContext.DisplayCallback(interruptContext.SSD, pin);
             }
                   
         }
+    }
+}
+
+void HandleDisplayInterruptI2C(ssd1306_t* ssd, uint8_t pin) {
+    if (gpio_get(pin) == 1){
+        if (pin == 12){
+            I2CDraw(ssd, true, "Azul ligado!");
+        } else if (pin == 11) {
+            I2CDraw(ssd, true, "Verde ligado!");
+        }
+    } else {
+           if (pin == 12){
+            I2CDraw(ssd, true, "Azul desligado!");
+        } else if (pin == 11) {
+            I2CDraw(ssd, true, "Verde desligado!");
+        }     
     }
 }
