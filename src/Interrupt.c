@@ -24,13 +24,11 @@ void HandleInterruptRGB(uint gpio, uint32_t events) {
             if (gpio == interruptContext.pinToCompare[0]){
                 intervalButtonA = currentTime;
                 pin = interruptContext.RGBPin[2];
-                printf("PIN: %d\n",pin);
                 interruptContext.Callback(pin);
                 interruptContext.DisplayCallback(interruptContext.SSD, pin);
             } else {
                 intervalButtonB = currentTime;
                 pin = interruptContext.RGBPin[1];
-                printf("PIN: %d\n",pin);
                 interruptContext.Callback(pin);
                 interruptContext.DisplayCallback(interruptContext.SSD, pin);
             }

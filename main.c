@@ -20,12 +20,12 @@
 
 int main(){
 
-    ssd1306_t ssd;
+    ssd1306_t ssd; //Declaração de uma struct para a manipulação do display
     bool cor = true;  
 
-    PIORefs pio;
+    PIORefs pio; //declaração da struct para armazenar a PIO
 
-    PinOut pins[PINS] = {
+    PinOut pins[PINS] = { //inicialização dos pinos de LEDs e botões
         { 
             .Pin = REDPIN, 
             .Input = false
@@ -47,7 +47,7 @@ int main(){
             .Input = true
         }
     };
-    Sketch sketch = {
+    Sketch sketch = { //Struct para armazenar os desenhos da matriz de LEDs (para o controle via PIO)
         .Figure = {
             0.0, 0.0, 0.0, 0.0, 0.0,
             0.0, 0.0, 0.0, 0.0, 0.0,
@@ -69,37 +69,38 @@ int main(){
     };
     uint32_t ledConf = 0;
 
-    Config(pins, PINS, &pio);
+    Config(pins, PINS, &pio); // Configuração da UART e da PIO
 
-    InitPIO(&pio, MATRIXPIN);
+    InitPIO(&pio, MATRIXPIN); // Inizialização da PIO
 
-    Draw(sketch, ledConf, pio);
+    Draw(sketch, ledConf, pio); //Desenha um quadrado azul
 
-    I2CInit(&ssd);
+    I2CInit(&ssd); //Inicia a I2C
 
 
-    interruptContext.pinToCompare[1] = BUTTONB;
-    interruptContext.pinToCompare[0] = BUTTONA;
-    interruptContext.SSD = &ssd;
+    interruptContext.pinToCompare[1] = BUTTONB; // Armazena o pino do botão B para no contexto global da interrupção
+    interruptContext.pinToCompare[0] = BUTTONA; // Armazena o pino do botão A para no contexto global da interrupção
+    interruptContext.SSD = &ssd; // Armazena o endereço da struct de manipulação do display no contexto global da interrupção
 
-    int LEDPins[3] = {REDPIN, BLUEPIN, GREENPIN};
+    int LEDPins[3] = {REDPIN, BLUEPIN, GREENPIN}; // Inicializa um vetor com  os três valores de pinos de LEDs RGB
 
-    SetRGBInterrupt(&TogglePinNoTime, BUTTONA, LEDPins, &HandleDisplayInterruptI2C);
-    SetRGBInterrupt(&TogglePinNoTime, BUTTONB, LEDPins, &HandleDisplayInterruptI2C);
+    SetRGBInterrupt(&TogglePinNoTime, BUTTONA, LEDPins, &HandleDisplayInterruptI2C); // Configura a interrupção no botão A
+    SetRGBInterrupt(&TogglePinNoTime, BUTTONB, LEDPins, &HandleDisplayInterruptI2C); // Configura a interrupção no botão B
 
     char a;
     while(1){
 
-        a = getchar();
+        a = getchar(); // "Escuta" o caractere inserido via uart/serial
         if (a >= '0' && a <= 'z'){
-            char string[12] = {'C', 'a', 'r', 'a', 'c', 't', 'e', 'r', ':', ' ', a, '\0'};
-            I2CDraw(&ssd, cor, string);
+            char string[13] = {'C', 'a', 'r', 'a', 'c', 't', 'e', 'r', 'e', ':', ' ', a, '\0'};
+            I2CDraw(&ssd, cor, string); // desenha no display via I2C
+            printf("Caractere enviado: %c!\n", a); //escreve na saída serial via uart
         }
         
         switch(a){
             case '0':
-                ArrayCopySameSize(sketch.Figure, SketchArray(0), VECTORSIZE);
-                Draw(sketch, ledConf, pio);
+                ArrayCopySameSize(sketch.Figure, SketchArray(0), VECTORSIZE); //copia o vetor do número no vetor de LEDs da matriz
+                Draw(sketch, ledConf, pio); //desenha o vetor copiado com o número
                 break;
             case '1':
                 ArrayCopySameSize(sketch.Figure, SketchArray(1), VECTORSIZE);

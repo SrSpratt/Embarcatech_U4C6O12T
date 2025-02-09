@@ -19,10 +19,8 @@ void I2CInit(ssd1306_t* ssd){
 void I2CDraw(ssd1306_t* ssd, bool cor, char* string){
     // Atualiza o conteúdo do display com animações
     ssd1306_fill(ssd, !cor); // Limpa o display
-    ssd1306_rect(ssd, 3, 3, 122, 58, cor, !cor); // Desenha um retângulo
-    //ssd1306_draw_string(&ssd, "CEPEDI   TIC37", 8, 10); // Desenha uma string
-    ssd1306_draw_string(ssd, string, 10, 30); // Desenha uma string
-    //ssd1306_draw_string(ssd, "mnopqrstuvxwz", 10, 48); // Desenha uma string      
+    ssd1306_draw_string(ssd, "Roberto Vitor", 8, 10); // Desenha uma string
+    ssd1306_draw_string(ssd, string, 10, 30); // Desenha uma string   
     ssd1306_send_data(ssd); // Atualiza o display
 
     //sleep_ms(1000);
