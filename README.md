@@ -4,7 +4,8 @@
 * Roberto Vítor Lima Gomes Rodrigues
 
 #### Vídeo de funcionamento
-* 
+* https://youtu.be/U6oxTWKkKCs
+    * Obs.: foram implementadas todas as características pedidas na atividade -> Protocolos UART e I2C, verificáveis pelo monitor serial e o display OLED; Interrupções e Debouncing, verificáveis pelos botões e pela ausências de missclicks; controle dos LEDs RGBs e controle da matriz de LEDs.
 
 #### Instruções de compilação
 Certifique-se de que você tem o ambiente configurado conforme abaixo:
