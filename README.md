@@ -1,5 +1,5 @@
-# Embarcatech_U4C4O12  
-### TAREFA 3 - U4C4O12 - Unidade 4 - Capítulo 4
+# Embarcatech_U4C6O12  
+### TAREFA U4C6O12 - Unidade 4 - Capítulo 6
 #### Autor:
 * Roberto Vítor Lima Gomes Rodrigues
 
