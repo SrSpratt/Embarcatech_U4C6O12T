@@ -67,6 +67,7 @@ target_link_libraries(${PROJECT_NAME}
     hardware_adc
     hardware_clocks
     hardware_gpio
+    hardware_i2c
 )
 
 #Indica o diretório de cabeçalhos

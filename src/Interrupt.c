@@ -24,12 +24,12 @@ void HandleInterruptRGB(uint gpio, uint32_t events) {
                 intervalButtonA = currentTime;
                 pin = interruptContext.RGBPin[2];
                 printf("PIN: %d\n",pin);
-                interruptContext.Callback(12);
+                interruptContext.Callback(11);
             } else {
                 intervalButtonB = currentTime;
                 pin = interruptContext.RGBPin[0];
                 printf("PIN: %d\n",pin);
-                interruptContext.Callback(13);
+                interruptContext.Callback(12);
             }
                   
         }
